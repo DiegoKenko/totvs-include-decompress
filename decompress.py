@@ -1,4 +1,5 @@
 #sample: ./decompress.py .\includes\sigawin.ch > sigawin.ch
+# This tool decompresses TOTVS include files (.ch and .th) into readable text format
 
 import zlib
 import sys
@@ -11,7 +12,7 @@ def create_txt_file(content, filename):
     print(f"File '{filename}' created successfully.")
 
 def decompress_file(input_file, output_file):
-    """Decompress a single file"""
+    """Decompress a TOTVS include file (.ch or .th)"""
     try:
         with open(input_file, 'rb') as f:
             content = f.read()
@@ -29,7 +30,7 @@ def decompress_file(input_file, output_file):
 include_folder = "include"
 if os.path.exists(include_folder):
     for filename in os.listdir(include_folder):
-        if filename.endswith('.ch'):  # Only process .ch files
+        if filename.endswith(('.ch', '.th')):  # Process both .ch and .th files
             input_path = os.path.join(include_folder, filename)
             output_path = f"decompressed_{filename}.txt"
             print(f"Processing {filename}...")
